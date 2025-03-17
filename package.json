@@ -1,0 +1,36 @@
+{
+  "name": "fitnesslook-v2.0",
+  "version": "2.0.0",
+  "description": "Update for fitnesslook",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp runDev",
+    "build": "gulp buildProd",
+    "deploy": "gulp PubProd"
+  },
+  "keywords": [],
+  "author": "Fitnesslook",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "babel-loader": "^10.0.0",
+    "browser-sync": "^3.0.3",
+    "file-include": "^0.3.0",
+    "gulp": "^5.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-file-include": "^2.3.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^6.0.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.85.1",
+    "uglify-js": "^3.19.3",
+    "webpack": "^5.98.0",
+    "webpack-stream": "^7.0.0"
+  }
+}
