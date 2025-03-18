@@ -1,11 +1,17 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import * as dartSass from 'sass';
-import webpack from 'webpack-stream';
 import gulpSass from 'gulp-sass';
-import uglify from 'gulp-uglify';
 import fileInclude from 'gulp-file-include';
-import browserSync from "browser-sync";
+import browserSync from 'browser-sync';
+import svgSprite from 'gulp-svg-sprite';
+import cheerio from 'gulp-cheerio';
+import replace from 'gulp-replace';
+import webp from 'gulp-webp';
+import {deleteAsync} from 'del';
+
+import uglify from 'gulp-uglify';
+import webpack from 'webpack-stream';
 import babel from 'gulp-babel';
 import sourcemaps from 'gulp-sourcemaps';
 import rename from 'gulp-rename';
@@ -20,9 +26,9 @@ const Path = {
     html: `${SRC_FOLDER}/html/*.html`,
     scss: `${SRC_FOLDER}/style/resource/*.scss`,
     js: `${SRC_FOLDER}/js/resource/*.js`,
-    img: `${SRC_FOLDER}/i/media-resource/**/*.{jpg,png}`,
-    sprite: `${SRC_FOLDER}/i/media-resource/icons/**/*.svg`,
-    assets: `${SRC_FOLDER}/i/media-resource/**/*`,
+    img: `${SRC_FOLDER}/i/media-resource/**/*.{jpg,png,svg}`,
+    sprite: `${SRC_FOLDER}/i/icons/**/*.svg`,
+    assets: `${SRC_FOLDER}/i/media-resource/**/*.{jpg,png,svg}`,
     json: `${SRC_FOLDER}/json/**/*.json`,
   },
   BUILD: {
@@ -43,11 +49,13 @@ const Path = {
   },
   WATCH: {
     html: `${SRC_FOLDER}/html/**/*.html`,
-    css: `${SRC_FOLDER}/style/resource/**/*.scss`,
+    scss: `${SRC_FOLDER}/style/resource/**/*.scss`,
     js: `${SRC_FOLDER}/js/resource/**/*.js`,
     json: `${SRC_FOLDER}/json/**/*.{json}`,
-    assets: `${SRC_FOLDER}/i/media-resource/**/*.{jpg,png}`,
+    sprite: `${SRC_FOLDER}/i/icons/**/*.svg`,
+    assets: `${SRC_FOLDER}/i/media-resource/**/*.{jpg,png,svg}`,
   },
+  CLEAN: ['./*.html', `${PROJECT_FOLDER}/i/media`, `${PROJECT_FOLDER}/js/modules/`, `${PROJECT_FOLDER}/style/modules/`]
 };
 
 const sass = gulpSass(dartSass);
@@ -55,7 +63,7 @@ const browser = browserSync.create();
 
 let isDevelopment = true;
 
-export function html() {
+function createHtml() {
   return gulp
     .src(Path.SRC.html)
     .pipe(
@@ -71,7 +79,7 @@ export function html() {
     .pipe(browser.stream());
 }
 
-export function styles() {
+function createStyles() {
   return gulp
     .src(Path.SRC.scss, { sourcemaps: isDevelopment })
     .pipe(plumber())
@@ -89,11 +97,63 @@ export function styles() {
     .pipe(browser.stream());
 }
 
+function createSprite() {
+  return gulp
+    .src(Path.SRC.sprite)
+    .pipe(plumber())
+    .pipe(
+      cheerio({
+        run: ($) => {
+          $('[fill]').removeAttr('fill');
+          $('[stroke]').removeAttr('stroke');
+          $('[style]').removeAttr('style');
+        },
+        parserOptions: { xmlMode: true },
+      })
+    )
+    .pipe(replace('&gt;', '>'))
+    .pipe(
+      svgSprite({
+        mode: {
+          symbol: {
+            sprite: '../sprite.svg',
+          },
+        },
+      })
+    )
+    .pipe(gulp.dest(Path.BUILD.sprite));
+}
 
-export function serve(done) {
+function copyAssets() {
+  return gulp.src(Path.SRC.assets, { base: 'i/media-resource' }).pipe(gulp.dest(Path.BUILD.assets));
+}
+
+function createWebp() {
+  return gulp
+    .src(Path.SRC.img)
+    .pipe(webp({ quality: 80 }))
+    .pipe(gulp.dest(Path.BUILD.img));
+}
+
+function optimizeImages() {
+  return gulp
+    .src(Path.SRC.img)
+    .pipe(
+      imagemin([
+        imagemin.mozjpeg({ quality: 75, progressive: true }),
+        imagemin.optipng({ optimizationLevel: 5 }),
+        imagemin.svgo({
+          plugins: [{ removeViewBox: false }, { cleanupIDs: false }],
+        }),
+      ])
+    )
+    .pipe(gulp.dest(Path.BUILD.img));
+}
+
+function serve(done) {
   browser.init({
     server: {
-      baseDir: SERVER_FOLDER
+      baseDir: SERVER_FOLDER,
     },
     cors: true,
     notify: false,
@@ -107,28 +167,27 @@ function reload(done) {
   done();
 }
 
+function clean() {
+  return deleteAsync(Path.CLEAN);
+}
+
 function watch() {
-  gulp.watch(Path.WATCH.css, gulp.series(styles, reload));
-  // gulp.watch(path.watch.assets, gulp.series(copyAssets, createWebp));
+  gulp.watch(Path.WATCH.scss, gulp.series(createStyles, reload));
+  gulp.watch(Path.WATCH.sprite, gulp.series(createSprite, reload));
+  gulp.watch(Path.WATCH.assets, gulp.series(copyAssets, reload));
+  gulp.watch(Path.SRC.img, gulp.series(createWebp));
   // gulp.watch(path.watch.json, gulp.series(reloadServer));
   // gulp.watch(Path.WATCH.js, gulp.series(scripts, reload));
-  gulp.watch(Path.WATCH.html, gulp.series(html, reload));
+  gulp.watch(Path.WATCH.html, gulp.series(createHtml, reload));
 }
 
 function compileProject(done) {
-  gulp.parallel(
-    html,
-    styles,
-    // scripts,
-    // copyAssets,
-    // createStack,
-    // createWebp
-  )(done);
+  gulp.parallel(createHtml, createStyles, copyAssets, createSprite)(done);
 }
 
 export function runDev(done) {
   gulp.series(
-    // deleteFolders,
+    clean,
     compileProject,
     serve,
     watch

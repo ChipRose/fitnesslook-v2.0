@@ -1,6 +1,7 @@
+@use "./global/fonts";
 @use "./global/variables";
-@use "./components/header";
+@use "./global/basic";
 
-*{
-  color:red;
-}
+
+@use "./components/buttons";
+@use "./components/header";

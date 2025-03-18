@@ -1,3 +1,60 @@
-* {
-  color: red;
+@font-face {
+  font-family: "Roboto";
+  src: url("/i/fonts/roboto-var-normal.ttf") format("truetype-variations");
+}
+:root {
+  --cl-black-main: #2E2E2E;
+  --cl-grey-dark: #717171;
+  --cl-grey-light: #BCBCBC;
+  --cl-background: #F2F2F2;
+  --cl-white: #FFFFFF;
+  --cl-purple-accent: #AB76B4;
+  --cl-purple-secondary: #D8C5DB;
+  --cl-purple-dark: #975DA0;
+  --cl-blue-technical: #3191EB;
+  --cl-green-success: #15AD36;
+  --cl-red-alert: #F24343;
+  --transition-main: all 0.3s ease-in;
+}
+
+.body {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 14px;
+  font-variation-settings: "wght" 400;
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  overflow: hidden;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 10px;
+  min-width: 320px;
+  max-width: 1200px;
+  box-sizing: border-box;
+}
+
+.image-block {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: var(--cl-background);
+}
+.image-block img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
