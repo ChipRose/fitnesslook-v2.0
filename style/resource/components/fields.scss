@@ -1,0 +1,65 @@
+@use "./global/mixins";
+@use "./global/const" as *;
+
+.search-form {
+  position: relative;
+  border-radius: 6px;
+  height: 100%;
+  min-height: 36px;
+  box-sizing: content-box;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+
+  .search-form__field {
+    padding: 7px 40px 7px 8px;
+    width: 100%;
+    flex: 1;
+    min-height: unset;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    background: var(--cl-background);
+
+    @include mixins.text1-mob;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      opacity: 1;
+      color: var(--cl-grey-light);
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    @media screen and (min-width:$tablet-width) {
+      padding: 17px 40px 17px 17px;
+    }
+  }
+
+  .search-form__button {
+    padding: 0 8px;
+    box-sizing: border-box;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translate(-100%, -50%);
+
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--cl-grey-dark);
+    }
+
+    @media screen and (min-width:$tablet-width) {
+      padding: 0 16px;
+    }
+  }
+}

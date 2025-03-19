@@ -1,7 +1,7 @@
-<header class="header">
+<header class="header open-menu">
   <div class="container">
-    <div class="main-nav">
-      <div class="button-select">
+    <div class="main-nav header__main-nav">
+      <div class="button-select main-nav__item">
         <button class="button-select__button button-labeled" type="button">
           <span class="button-labeled__icon-block">
             <svg class="icon" width="24" height="24" role="img" focusable="false">
@@ -18,40 +18,118 @@
           </li>
         </ul>
       </div>
-      <div class="main-nav__logo-block">
+      <div class="main-nav__item main-nav__item--desktop-hide">
         <a href="/" class="main-nav__logo">
-          <picture>
-            <img src="@@pathi/media/fl-logo.svg" alt="Лого Fitnesslook">
-          </picture>
+          <img src="@@pathi/media/fl-logo.svg" width="80" height="32" alt="Лого Fitnesslook">
         </a>
       </div>
-      <nav class="main-nav__nav-block">
-        <ul class="nav-list">
-          <li class="nav-list__item">
-            <a href="/" class="nav-list__link">Магазины</a>
-          </li>
-          <li class="nav-list__item nav-list__item--has-submenu">
-            <button class="button-accordion" type="button">
-              <span class="button-accordion__label">Покупателям</span>
-              <span class="button-accordion__icon-block">
-                <svg width="24" height="24" role="img" focusable="false">
-                  <use xlink:href="@@pathi/media/sprite.svg#catalog"></use>
+      <div class="main-nav__nav main-nav__item ">
+        <h2 class="visually-hidden">
+          Навигационное меню
+        </h2>
+        <nav class="main-nav__nav-list">
+          <ul class="nav-list">
+            <li class="nav-list__item">
+              <a href="/" class="nav-list__link">Магазины</a>
+            </li>
+            <li class="nav-list__item open-submenu">
+              <button class="nav-list__accordion" type="button">
+                <span class="nav-list__accordion-label">Покупателям</span>
+                <span class="nav-list__accordion-icon-block">
+                  <svg class="nav-list__accordion-icon" width="16" height="16" role="img" focusable="false">
+                    <use xlink:href="@@pathi/media/sprite.svg#arrow-down-xs"></use>
+                  </svg>
+                </span>
+              </button>
+              <ul class="nav-submenu">
+                <li class="nav-submenu__item">
+                  <a href="/" class="nav-submenu__link">Пункт-1</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-list__item">
+              <a href="/" class="nav-list__link">Открыть зал</a>
+            </li>
+            <li class="nav-list__item">
+              <a href="/" class="nav-list__link">О нас</a>
+            </li>
+            <li class="nav-list__item">
+              <a href="/" class="nav-list__link">Журнал</a>
+            </li>
+            <li class="nav-list__item">
+              <a href="/" class="nav-list__link">Контакты</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="contacts main-nav__contacts">
+          <div class="contacts__title-block">
+            <h3 class="contacts__title">
+              Связаться с нами:
+            </h3>
+          </div>
+          <ul class="contacts__links-list">
+            <li class="contacts__links-item">
+              <a class="contacts__link" href="tel:88005009427">
+                <span class="contacts__link-icon">
+                  <svg width="24" height="24" role="img" focusable="false">
+                    <use href="@@pathi/media/sprite.svg#phone"></use>
+                  </svg>
+                </span>
+                <span class="contacts__link-label">
+                  8 (800) 500-94-27
+                </span>
+              </a>
+            </li>
+            <li class="contacts__links-item">
+              <a class="contacts__link" href="tel:88124071025">
+                <span class="contacts__link-icon">
+                  <svg width="24" height="24" role="img" focusable="false">
+                    <use href="@@pathi/media/sprite.svg#phone"></use>
+                  </svg>
+                </span>
+                <span class="contacts__link-label">
+                  8 (812) 407-10-25
+                </span>
+              </a>
+            </li>
+          </ul>
+          <ul class="contacts__social-list">
+            <li class="contacts__social-item">
+              <a href="/" class="contacts__social-link" title="Открыть страницу ВКонтакте">
+                <svg width="36" height="36" role="img" focusable="false">
+                  <use href="@@pathi/media/sprite.svg#vk"></use>
                 </svg>
-              </span>
-            </button>
-            <ul class="nav-submenu">
-              <li class="nav-submenu__item">
-                <a href="/" class="nav-submenu__link">Пункт-1</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-      <div class="main-nav__contacts-block">
-        <a class="button-labeled" tel="88124071025">
+              </a>
+            </li>
+            <li class="contacts__social-item">
+              <a href="/" class="contacts__social-link" title="Открыть сообщество в Telegram">
+                <svg width="36" height="36" role="img" focusable="false">
+                  <use href="@@pathi/media/sprite.svg#telegram"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="contacts__social-item">
+              <a href="/" class="contacts__social-link" title="Открыть WhatsApp">
+                <svg width="36" height="36" role="img" focusable="false">
+                  <use href="@@pathi/media/sprite.svg#whatsapp"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="contacts__social-item">
+              <a href="/" class="contacts__social-link" title="Открыть Youtube">
+                <svg width="36" height="36" role="img" focusable="false">
+                  <use href="@@pathi/media/sprite.svg#youtube"></use>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-nav__item">
+        <a class="button-labeled" href="tel:88124071025">
           <span class="button-labeled__icon-block">
             <svg width="24" height="24" role="img" focusable="false">
-              <use xlink:href="@@pathi/media/sprite.svg#phone"></use>
+              <use href="@@pathi/media/sprite.svg#phone"></use>
             </svg>
           </span>
           <span class="button-labeled__label">
@@ -60,42 +138,61 @@
         </a>
       </div>
     </div>
-    <div class="action-panel">
-      <div class="action-panel__navigation-control">
-        <button class="button-catalog" type="button">
-          <span class="button-catalog__icon-block">
-            <svg width="24" height="24" role="img" focusable="false">
-              <use xlink:href="@@pathi/media/sprite.svg#catalog"></use>
-            </svg>
+    <div class="action-panel open">
+      <div class="action-panel__logo">
+        <a href="/" class="main-nav__logo">
+          <img src="@@pathi/media/fl-logo.svg" width="130" height="52" alt="Лого Fitnesslook">
+        </a>
+      </div>
+      <div class="action-panel__button">
+        <button class="button-burger action-panel__button-burger" type="button">
+          <span class="burger-line"></span>
+        </button>
+        <button class="button-catalog action-panel__button-catalog" type="button">
+          <span class="button-catalog__img">
+            <span class="burger-line burger-line--light"></span>
           </span>
-          <span class="button-catalog__label">
-            Каталог
-          </span>
+          <span class="button-catalog__label">Каталог</span>
         </button>
       </div>
-      <form class="action-panel__search search-form">
-        <input class="search-form__field" type="search" id="search" name="searchstring" required placeholder="Найти товар, категорию" aria-label="Поиск">
-        <button class="search-form__button button-icon" type="submit">
-          <svg class="icon" width="24" height="24" role="img" focusable="false">
-            <use xlink:href="@@pathi/media/sprite.svg#search"></use>
-          </svg>
-        </button>
-      </form>
-      <div class="action-panel__user-control">
-        <button class="button-icon" type="button">
-          <svg width="24" height="24" role="img" focusable="false">
-            <use xlink:href="@@pathi/media/sprite.svg#compare"></use>
-          </svg>
-          <span class="button-icon__sticker">1</span>
-        </button>
+      <div class="action-panel__search-form">
+        <form class="search-form">
+          <input class="search-form__field" type="search" id="search" name="searchstring" required placeholder="Найти товар, категорию" aria-label="Поиск">
+          <button class="search-form__button" type="submit">
+            <svg class="search-form__icon" width="24" height="24" role="img" focusable="false">
+              <use xlink:href="@@pathi/media/sprite.svg#search"></use>
+            </svg>
+          </button>
+        </form>
+      </div>
+      <div class="action-panel__user-panel">
+        <ul class="buttons-list">
+          <li class="buttons-list__item">
+            <a class="button-icon button-icon--has-sticker" href="/">
+              <svg class="button-icon__icon" width="24" height="24" role="img" focusable="false">
+                <use xlink:href="@@pathi/media/sprite.svg#compare"></use>
+              </svg>
+              <span class="button-icon__sticker">1</span>
+            </a>
+          </li>
+          <li class="buttons-list__item">
+            <a class="button-icon" href="/">
+              <svg class="button-icon__icon" width="24" height="24" role="img" focusable="false">
+                <use xlink:href="@@pathi/media/sprite.svg#favorite"></use>
+              </svg>
+              <span class="button-icon__sticker"></span>
+            </a>
+          </li>
+          <li class="buttons-list__item button-icon--has-sticker">
+            <a class="button-icon" href="/">
+              <svg class="button-icon__icon" width="24" height="24" role="img" focusable="false">
+                <use xlink:href="@@pathi/media/sprite.svg#cart"></use>
+              </svg>
+              <span class="button-icon__sticker">20</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-  <nav class="product-nav">
-    <ul class="product-nav__list">
-      <li class="product-nav__item">
-
-      </li>
-    </ul>
-  </nav>
 </header>

@@ -1,0 +1,24 @@
+@use "./global/const" as *;
+
+@mixin text1-mob {
+  font-family: 'Roboto','Arial', sans-serif;
+  font-size: 14px;
+  line-height: 128%; 
+  font-variation-settings: "wght" 400;
+}
+
+@mixin text4-desk {
+  font-family: 'Roboto','Arial', sans-serif;
+  font-size: 20px;
+  line-height: 110%; 
+  font-variation-settings: "wght" 700;
+  letter-spacing: -0.2px;
+}
+
+@mixin text4-semi {
+  font-family: 'Roboto','Arial', sans-serif;
+  font-size: 14px;
+  font-variation-settings: "wght" 600;
+  line-height: 128%; 
+  letter-spacing: -0.28px;
+}
